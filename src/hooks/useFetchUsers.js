@@ -59,6 +59,41 @@ const useFetchUser = () => {
       Alert.alert("Error", "Ocurrió un error al enviar los datos");
     }
   };
+
+  // Función para eliminar usuario
+  const handleDelete = async (id) => {
+    Alert.alert(
+      "Confirmar eliminación",
+      "¿Estás seguro de que deseas eliminar este usuario?",
+      [
+        {
+          text: "Cancelar",
+          style: "cancel",
+        },
+        {
+          text: "Eliminar",
+          style: "destructive",
+          onPress: async () => {
+            try {
+              const response = await fetch(`https://retoolapi.dev/zZhXYF/movil/${id}`, {
+                method: "DELETE",
+              });
+              
+              if (response.ok) {
+                Alert.alert("Éxito", "Usuario eliminado correctamente");
+                fetchUsuarios();
+              } else {
+                Alert.alert("Error", "No se pudo eliminar el usuario");
+              }
+            } catch (error) {
+              console.error(error);
+              Alert.alert("Error", "Ocurrió un error al eliminar el usuario");
+            }
+          },
+        },
+      ]
+    );
+  };
  
   // Ejecutar al cargar componente
   useEffect(() => {
@@ -77,6 +112,7 @@ const useFetchUser = () => {
     usuarios,
     loading,
     fetchUsuarios,
+    handleDelete,
   };
 };
  

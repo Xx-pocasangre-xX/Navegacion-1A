@@ -1,46 +1,26 @@
 import { StyleSheet, Text, View } from "react-native";
+import Buttons from "../Buttons";
  
-const CardUser = ({ user }) => {
+const CardUser = ({ user, onEdit, onDelete }) => {
   return (
     <View style={styles.card}>
       <Text style={styles.cardTitle}>{user.nombre}</Text>
       <Text style={styles.cardText}>Edad: {user.edad}</Text>
       <Text style={styles.cardText}>Correo: {user.correo}</Text>
+      
+      <View style={styles.buttonContainer}>
+        <View style={styles.buttonWrapper}>
+          <Buttons text="Editar" action={() => onEdit(user)} />
+        </View>
+        <View style={styles.buttonWrapper}>
+          <Buttons text="Eliminar" action={() => onDelete(user.id)} />
+        </View>
+      </View>
     </View>
   );
 };
  
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#EAD8C0",
-    paddingHorizontal: 20,
-    paddingTop: 40,
-  },
-  listContainer: {
-    paddingBottom: 30,
-  },
-  title: {
-    fontSize: 26,
-    fontWeight: "bold",
-    color: "#5C3D2E",
-    textAlign: "center",
-    marginBottom: 5,
-  },
-  subtitle: {
-    fontSize: 16,
-    fontWeight: "500",
-    color: "#5C3D2E",
-    textAlign: "center",
-    marginBottom: 10,
-  },
-  counterText: {
-    fontSize: 16,
-    fontWeight: "600",
-    color: "#3B2C24",
-    textAlign: "center",
-    marginBottom: 10,
-  },
   card: {
     backgroundColor: "#FFF",
     borderRadius: 12,
@@ -61,9 +41,17 @@ const styles = StyleSheet.create({
   cardText: {
     fontSize: 16,
     color: "#3B2C24",
+    marginBottom: 3,
+  },
+  buttonContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginTop: 10,
+  },
+  buttonWrapper: {
+    flex: 1,
+    marginHorizontal: 5,
   },
 });
  
 export default CardUser;
- 
- 
